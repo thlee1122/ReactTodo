@@ -9,7 +9,7 @@ var TodoList = React.createClass({
 				return (
 					//{...todo} will spread through the 'todo' object and find the properties in that object
 					//with this you will be able to use 'this.props' and get 'text' property of the 'todo' object
-					<Todo key={todo.id} {...todo}/>
+					<Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>
 				)
 			})
 		};
