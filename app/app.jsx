@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Provider = require('react-redux');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
 var TodoApp = require('TodoApp');
@@ -22,6 +23,11 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-  <TodoApp/>,
-  document.getElementById('app')
+	//You need <provider> tag so that the elements that are passed in this tag can have access to store.
+	//TodoApp as well as its children will have access to data in the store and use dispatch store.
+	//<Provider> tag needs an attribute call store and it needs to the name of the store component that you created.
+	<Provider store={store}>
+		 <TodoApp/>
+	</Provider>,
+ 	document.getElementById('app')
 );
