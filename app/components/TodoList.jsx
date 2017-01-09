@@ -2,10 +2,11 @@ var React = require('react');
 var {connect} = require('react-redux');
 import Todo from 'Todo';
 // var Todo = require('Todo');
+var TodoAPI = require('TodoAPI');
 
 export var TodoList = React.createClass({
   render: function () {
-    var {todos} = this.props;
+    var {todos, showCompleted, searchText} = this.props;
     var renderTodos = () => {
       if (todos.length === 0) {
         return (
@@ -13,7 +14,7 @@ export var TodoList = React.createClass({
         );
       }
 
-      return todos.map((todo) => {
+      return TodoAPI.filterTodos(todos, showCompleted, searchText).map((todo) => {
         //{...todo} will spread through the 'todo' object and find the properties in that object
         //with this you will be able to use 'this.props' and get 'text' property of the 'todo' object
         //<Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/>
@@ -33,8 +34,6 @@ export var TodoList = React.createClass({
 
 export default connect(
   (state) => {
-    return {
-      todos: state.todos
-    };
+    return state;
   }
 )(TodoList);
